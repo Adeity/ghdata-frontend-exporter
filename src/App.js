@@ -1,24 +1,24 @@
 import './App.css';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Routes,
-    Route,
-    Link
-} from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Header";
+import HeaderAndMain from "./components/HeaderAndMain";
+import Footer from "./components/Footer";
+import Container from "react-bootstrap/Container";
+import LoginPage from "./components/LoginPage/LoginPage";
+import React, {useState} from "react";
 
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {isLoggedIn: false}
+    }
 
-
-
-function App() {
-  return (
-      <div>
-          <Header />
-          <Footer />
-      </div>
-  );
+    render () {
+        return (
+                <div id={"main-container"}>
+                    <HeaderAndMain isLoggedIn={this.state.isLoggedIn}/>
+                    <Footer />
+                </div>
+            )
+    }
 }
 
 export default App;
