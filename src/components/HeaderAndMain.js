@@ -39,7 +39,7 @@ class HeaderAndMain extends React.Component{
                         <Routes>
                             <Route path="/" element={<Home/>} />
                             <Route path="/user-page" element={<UserPage />} />
-                            <Route path="/login" element={<LoginPage />} />
+                            <Route path="/login" element={<LoginPage setLoggedUser={this.props.setLoggedUser}/>} />
                         </Routes>
                     </Container>
                 </main>
