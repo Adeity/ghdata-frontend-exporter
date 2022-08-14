@@ -26,8 +26,8 @@ class App extends React.Component {
         this.checkAuthorized();
     }
 
-    checkAuthorized() {
-        checkAuthorized().then((res) => {
+    async checkAuthorized() {
+        await checkAuthorized().then((res) => {
             this.setLoggedUser(res.data)
         })
             .catch((err) => {

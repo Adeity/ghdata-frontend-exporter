@@ -1,7 +1,7 @@
 import axios from "axios";
-import {checkAuthorizedUrl, dummyUrl} from "./components/UrlConstantHolder";
+import {checkAuthorizedUrl} from "./components/UrlConstantHolder";
 
-function checkAuthorized() {
+async function checkAuthorized() {
     return axios.get(checkAuthorizedUrl, {withCredentials: true})
 }
 
