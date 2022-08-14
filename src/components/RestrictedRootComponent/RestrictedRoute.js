@@ -8,8 +8,6 @@ const RestrictedRoute = (props) => {
     useEffect(() => {
         if (props.authorizationConstants.authorizationChecked) {
             if (!props.authorizationConstants.isLoggedIn) {
-                const authConstasnt = props.authorizationConstants
-                debugger
                 navigate("/login")
             }
         }

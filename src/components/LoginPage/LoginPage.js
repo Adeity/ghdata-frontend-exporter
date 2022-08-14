@@ -3,11 +3,12 @@ import './LoginPage.css'
 import Form from 'react-bootstrap/Form'
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import {authenticate} from "./AxiosAuthenticator";
+import {sendAuthenticateRequest} from "../AxiosRequestor/AxiosRequestor";
 import {validateInput} from "./LoginInputValidator";
 import "../Errors/ErrorMessage.css"
 import {Navigate} from "react-router-dom"
 import "../FormPage.css"
+import {Alert} from "react-bootstrap";
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -28,17 +29,17 @@ class LoginPage extends React.Component {
         this.setState({redirect: redirect})
     }
 
-    handleSubmitClick() {
+    async handleSubmitClick() {
         this.setState({err: null})
         try {
             validateInput(this.state.username, this.state.password)
-            authenticate(this.state.username, this.state.password)
+            await sendAuthenticateRequest(this.state.username, this.state.password)
                 .then((res) => {
                     if (res.data.success) {
                         this.props.setLoggedUser(res.data.username)
                         this.setRedirect(true)
                     } else {
-                        this.setErrorState("Kombinace uzivatelskheo jmena a hesla neexistuje")
+                        this.setErrorState("Kombinace uzivatelskeho jmena a hesla neexistuje")
                     }
                 })
         } catch (e) {
@@ -86,7 +87,7 @@ class LoginPage extends React.Component {
 
                             <div className={"ErrorMessage"}>
                                 {
-                                    this.state.err != null && this.state.err
+                                    this.state.err != null && <Alert variant={"danger"}>{this.state.err}</Alert>
                                 }
                             </div>
                             <Button variant="primary" onClick={() => this.handleSubmitClick()}>

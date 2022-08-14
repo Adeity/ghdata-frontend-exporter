@@ -20,7 +20,7 @@ class HeaderAndMain extends React.Component{
             (<Link className="nav-link" to="/login">Prihlasit se</Link>)
         return (
             <Router>
-                <Navbar bg="light">
+                <Navbar bg="light" className={"mb-3"}>
                     <Container>
                         <Navbar.Brand>
                             VyzkumOdolnosti exporter
@@ -50,7 +50,7 @@ class HeaderAndMain extends React.Component{
                                 <RestrictedRoute
                                     authorizationConstants={this.props.authorizationConstants}
                                 >
-                                    <UserPage username={this.props.authorizationConstants.username} />
+                                    <UserPage setLoggedUser={this.props.setLoggedUser} username={this.props.authorizationConstants.username} />
                                 </RestrictedRoute>
                             } />
                             <Route path="/login" element={

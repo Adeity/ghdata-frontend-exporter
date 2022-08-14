@@ -16,6 +16,10 @@ class App extends React.Component {
     }
 
     setLoggedUser(username) {
+        if (username === null) {
+            this.setState({loggedUsername: "", isLoggedIn: false})
+            return;
+        }
         this.setState({loggedUsername: username, isLoggedIn: true})
     }
     setAuthorizationChecked() {
