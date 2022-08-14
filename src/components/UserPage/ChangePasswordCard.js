@@ -1,11 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card'
-import './ChangePasswordCard.css'
+import '../FormPage.css'
 
 function ChangePasswordCard() {
     return (
-        <div className="ChangePasswordCard">
+        <div className="FormPage">
             <Card>
                 <Card.Header>
                     Zmenit heslo

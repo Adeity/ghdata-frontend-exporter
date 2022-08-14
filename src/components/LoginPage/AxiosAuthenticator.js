@@ -1,5 +1,5 @@
 import axios from "axios";
-import {loginUrl, checkAuthorizedUrl} from "../UrlConstantHolder";
+import {loginUrl} from "../UrlConstantHolder";
 
 function authenticate (username, password) {
     let bodyFormData = new FormData()
@@ -10,7 +10,8 @@ function authenticate (username, password) {
             method: "post",
             url: loginUrl,
             data: bodyFormData,
-            headers: {"Content-Type": "multipart/form-data"}
+            headers: {"Content-Type": "multipart/form-data"},
+            withCredentials: true
         }
     )
 }

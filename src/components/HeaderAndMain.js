@@ -6,6 +6,7 @@ import Home from "../components/Home";
 import UserPage from "./UserPage/UserPage";
 import React from "react";
 import LoginPage from "./LoginPage/LoginPage";
+import RestrictedRoute from "./RestrictedRootComponent/RestrictedRoute";
 
 class HeaderAndMain extends React.Component{
     constructor(props) {
@@ -13,8 +14,8 @@ class HeaderAndMain extends React.Component{
     }
 
     render () {
-        const loginOrUserLink = this.props.isLoggedIn ?
-            (<Link to="/user-page">Mark Otto</Link>) :
+        const loginOrUserLink = this.props.authorizationConstants.isLoggedIn ?
+            (<Link to="/user-page">Prihlasen jako: {this.props.authorizationConstants.username}</Link>) :
             (<Link to="/login">Prihlasit se</Link>)
         return (
             <Router>
@@ -24,7 +25,6 @@ class HeaderAndMain extends React.Component{
                         </Navbar.Brand>
                         <Nav className="me-auto">
                             <Link to="/">Domov</Link>
-                            <Link to="/about">Johnny</Link>
                         </Nav>
                         <Navbar.Toggle />
                         <Navbar.Collapse className="justify-content-end">
@@ -35,11 +35,25 @@ class HeaderAndMain extends React.Component{
                     </Container>
                 </Navbar>
                 <main>
-                    <Container>
+                    <Container className={"h-100"}>
                         <Routes>
-                            <Route path="/" element={<Home/>} />
-                            <Route path="/user-page" element={<UserPage />} />
-                            <Route path="/login" element={<LoginPage setLoggedUser={this.props.setLoggedUser}/>} />
+                            <Route path="" element={
+                                <RestrictedRoute
+                                    authorizationConstants={this.props.authorizationConstants}
+                                >
+                                    <Home/>
+                                </RestrictedRoute>
+                            } />
+                            <Route path="/user-page" element={
+                                <RestrictedRoute
+                                    authorizationConstants={this.props.authorizationConstants}
+                                >
+                                    <UserPage />
+                                </RestrictedRoute>
+                            } />
+                            <Route path="/login" element={
+                                <LoginPage setLoggedUser={this.props.setLoggedUser}/>
+                            } />
                         </Routes>
                     </Container>
                 </main>

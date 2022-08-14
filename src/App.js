@@ -1,42 +1,53 @@
 import './App.css';
 import HeaderAndMain from "./components/HeaderAndMain";
 import Footer from "./components/Footer";
-import Container from "react-bootstrap/Container";
-import LoginPage from "./components/LoginPage/LoginPage";
-import React, {useState} from "react";
+import React from "react";
 import {checkAuthorized} from "./AxiosAuthenticatorChecker";
+import {Navigate} from "react-router-dom";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             loggedUsername: "",
-            isLoggedIn: false
+            isLoggedIn: false,
+            authorizationChecked: false
         }
     }
 
     setLoggedUser(username) {
-        this.setState({loggedUsername: username})
-        this.setState({isLoggedIn: true})
+        this.setState({loggedUsername: username, isLoggedIn: true})
+    }
+    setAuthorizationChecked() {
+        this.setState({authorizationChecked: true})
     }
 
     componentDidMount() {
+        this.checkAuthorized();
+    }
+
+    checkAuthorized() {
         checkAuthorized().then((res) => {
-            console.log("something happened her")
-            console.log(res)
-            this.setLoggedUser(res)
+            this.setLoggedUser(res.data)
         })
             .catch((err) => {
-                console.log("unauthorized")
+                console.error(err)
             })
+        this.setAuthorizationChecked()
     }
 
     render () {
+        const authorizationConstants = {
+            username: this.state.loggedUsername,
+            isLoggedIn: this.state.isLoggedIn,
+            authorizationChecked: this.state.authorizationChecked
+        }
+        const changeLoggedUser = this.setLoggedUser;
         return (
                 <div id={"main-container"}>
                     <HeaderAndMain
-                        setLoggedUser={this.setLoggedUser.bind(this)}
-                        isLoggedIn={this.state.isLoggedIn}/>
+                        authorizationConstants={authorizationConstants}
+                        setLoggedUser={changeLoggedUser.bind(this)} />
                     <Footer />
                 </div>
             )

@@ -1,15 +1,13 @@
 import React from "react";
 import './LoginPage.css'
 import Form from 'react-bootstrap/Form'
-import Container from "react-bootstrap/Container";
-import InputGroup from'react-bootstrap/InputGroup'
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
 import {authenticate} from "./AxiosAuthenticator";
 import {validateInput} from "./LoginInputValidator";
 import "../Errors/ErrorMessage.css"
-import userPage from "../UserPage/UserPage";
+import {Navigate} from "react-router-dom"
+import "../FormPage.css"
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -17,12 +15,17 @@ class LoginPage extends React.Component {
         this.state = {
             username: "",
             password: "",
-            err: null
+            err: null,
+            redirect: false
         }
     }
 
     setErrorState(message) {
         this.setState({err: message})
+    }
+
+    setRedirect(redirect) {
+        this.setState({redirect: redirect})
     }
 
     handleSubmitClick() {
@@ -32,9 +35,9 @@ class LoginPage extends React.Component {
             authenticate(this.state.username, this.state.password)
                 .then((res) => {
                     if (res.data.success) {
-                        this.props.setLoggedUser(this.state.username)
-                    }
-                    else {
+                        this.props.setLoggedUser(res.data.username)
+                        this.setRedirect(true)
+                    } else {
                         this.setErrorState("Kombinace uzivatelskheo jmena a hesla neexistuje")
                     }
                 })
@@ -52,16 +55,20 @@ class LoginPage extends React.Component {
         this.setState({username: e.target.value})
     }
 
-    render () {
+    render() {
+        const {redirect} = this.state
+        if (redirect) {
+            return <Navigate to='/'/>
+        }
         return (
-            <div className="ChangePasswordCard">
+            <div className="FormPage">
                 <Card>
                     <Card.Header>
                         Prihlasit se
                     </Card.Header>
                     <Card.Body>
                         <Form>
-                            <Form.Group className="mb-3" controlId="oldPassword" >
+                            <Form.Group className="mb-3" controlId="oldPassword">
                                 <Form.Label>Uzivatelske jmeno</Form.Label>
                                 <Form.Control
                                     type="text"
@@ -80,9 +87,9 @@ class LoginPage extends React.Component {
                             </Form.Group>
 
                             <div className={"ErrorMessage"}>
-                            {
-                                this.state.err != null && this.state.err
-                            }
+                                {
+                                    this.state.err != null && this.state.err
+                                }
                             </div>
                             <Button variant="primary" onClick={() => this.handleSubmitClick()}>
                                 Prihlasit se
@@ -91,8 +98,8 @@ class LoginPage extends React.Component {
                     </Card.Body>
                 </Card>
             </div>
-    )
+        )
     }
 }
 
-export default LoginPage
+export default LoginPage;
