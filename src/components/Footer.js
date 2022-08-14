@@ -1,11 +1,16 @@
 import Container from "react-bootstrap/Container";
+import {Row} from "react-bootstrap";
+import {Col} from "react-bootstrap";
 
 function Footer() {
     return (
-
         <footer>
             <Container>
-                <h2>footer</h2>
+                <Row>
+                    <Col>
+                        <a className={""} href="https://www.vyzkumodolnosti.cz/" >VyzkumOdolnosti</a>
+                    </Col>
+                </Row>
             </Container>
         </footer>
     )

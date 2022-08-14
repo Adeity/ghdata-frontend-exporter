@@ -6,10 +6,8 @@ import '../FormPage.css'
 function ChangePasswordCard() {
     return (
         <div className="FormPage">
+            <h4>Zmena hesla</h4>
             <Card>
-                <Card.Header>
-                    Zmenit heslo
-                </Card.Header>
                 <Card.Body>
                     <Form>
                         <Form.Group className="mb-3" controlId="oldPassword">

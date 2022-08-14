@@ -7,6 +7,7 @@ import UserPage from "./UserPage/UserPage";
 import React from "react";
 import LoginPage from "./LoginPage/LoginPage";
 import RestrictedRoute from "./RestrictedRootComponent/RestrictedRoute";
+import "./Link.css"
 
 class HeaderAndMain extends React.Component{
     constructor(props) {
@@ -15,16 +16,17 @@ class HeaderAndMain extends React.Component{
 
     render () {
         const loginOrUserLink = this.props.authorizationConstants.isLoggedIn ?
-            (<Link to="/user-page">Prihlasen jako: {this.props.authorizationConstants.username}</Link>) :
-            (<Link to="/login">Prihlasit se</Link>)
+            (<Link className="nav-link" to="/user-page">Prihlasen jako: {this.props.authorizationConstants.username}</Link>) :
+            (<Link className="nav-link" to="/login">Prihlasit se</Link>)
         return (
             <Router>
                 <Navbar bg="light">
                     <Container>
-                        <Navbar.Brand href="#home">
+                        <Navbar.Brand>
+                            VyzkumOdolnosti exporter
                         </Navbar.Brand>
                         <Nav className="me-auto">
-                            <Link to="/">Domov</Link>
+                            <Link className="nav-link" to="/">Domov</Link>
                         </Nav>
                         <Navbar.Toggle />
                         <Navbar.Collapse className="justify-content-end">
@@ -48,7 +50,7 @@ class HeaderAndMain extends React.Component{
                                 <RestrictedRoute
                                     authorizationConstants={this.props.authorizationConstants}
                                 >
-                                    <UserPage />
+                                    <UserPage username={this.props.authorizationConstants.username} />
                                 </RestrictedRoute>
                             } />
                             <Route path="/login" element={

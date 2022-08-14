@@ -62,10 +62,8 @@ class LoginPage extends React.Component {
         }
         return (
             <div className="FormPage">
+                <h3>Prihlasit se</h3>
                 <Card>
-                    <Card.Header>
-                        Prihlasit se
-                    </Card.Header>
                     <Card.Body>
                         <Form>
                             <Form.Group className="mb-3" controlId="oldPassword">
