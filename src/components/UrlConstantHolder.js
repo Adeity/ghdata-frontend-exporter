@@ -6,5 +6,16 @@ const changePasswordUrl = baseUrl + "/api/security/change-password"
 const filterSleepsUrl = baseUrl + "/garmin/sleeps/filter"
 const checkAuthorizedUrl = baseUrl + "/api/security/check-authorized"
 const dummyUrl = baseUrl + "/api/security/dummy"
+const getActiveResearchNumbersUrl = baseUrl + "/device/active-research-numbers"
+const exportSleepsUrl = baseUrl + "/garmin/sleeps/export"
 
-export {loginUrl, changePasswordUrl, filterSleepsUrl, checkAuthorizedUrl, dummyUrl, logoutUrl}
+export {
+    loginUrl,
+    changePasswordUrl,
+    filterSleepsUrl,
+    checkAuthorizedUrl,
+    dummyUrl,
+    logoutUrl,
+    getActiveResearchNumbersUrl,
+    exportSleepsUrl
+}

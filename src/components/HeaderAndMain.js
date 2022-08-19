@@ -26,7 +26,7 @@ class HeaderAndMain extends React.Component{
                             VyzkumOdolnosti exporter
                         </Navbar.Brand>
                         <Nav className="me-auto">
-                            <Link className="nav-link" to="/">Domov</Link>
+                            <Link className="nav-link" to="/">Spanek</Link>
                         </Nav>
                         <Navbar.Toggle />
                         <Navbar.Collapse className="justify-content-end">
