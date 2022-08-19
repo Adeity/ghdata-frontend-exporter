@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:8080"
+const baseUrl = "https://vyzkumodolnosti.felk.cvut.cz"
 
 const loginUrl = baseUrl + "/j_spring_security_check"
 const logoutUrl = baseUrl + "/j_spring_security_logout"
