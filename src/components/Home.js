@@ -92,11 +92,12 @@ class Home extends React.Component{
         sendExportSleepsRequest(this.state.dateFrom, this.state.dateTo, checkedResearchNumbers)
             .then((res) => {
                 // Trick for making downloadable link
+                const today = new Date();
                 const a = document.createElement('a');
                 const blob = new Blob([res.data], {type: "blob"})
                 a.href = window.URL.createObjectURL(blob);
                 // Give filename you wish to download
-                a.download = "test-file.xls";
+                a.download = "export-spanku-" + today.getTime() + ".xls";
                 a.style.display = 'none';
                 document.body.appendChild(a);
                 a.click();
