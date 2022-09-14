@@ -1,4 +1,4 @@
-const baseUrl = "https://vyzkumodolnosti.felk.cvut.cz"
+const baseUrl = process.env.REACT_APP_BASE_URL
 
 const loginUrl = baseUrl + "/j_spring_security_check"
 const logoutUrl = baseUrl + "/j_spring_security_logout"

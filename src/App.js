@@ -3,7 +3,6 @@ import HeaderAndMain from "./components/HeaderAndMain";
 import Footer from "./components/Footer";
 import React from "react";
 import {checkAuthorized} from "./AxiosAuthenticatorChecker";
-import {Navigate} from "react-router-dom";
 
 class App extends React.Component {
     constructor(props) {
