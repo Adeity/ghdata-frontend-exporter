@@ -8,7 +8,7 @@ function Footer() {
             <Container>
                 <Row>
                     <Col>
-                        <a className={""} href="https://www.vyzkumodolnosti.cz/" >VyzkumOdolnosti</a>
+                        <a className={""} href="src/components/HeaderMainFooter/Footer" >VyzkumOdolnosti</a>
                     </Col>
                 </Row>
             </Container>

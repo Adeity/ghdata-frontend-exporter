@@ -1,5 +1,5 @@
 import axios from "axios";
-import {exportSleepsUrl} from "../UrlConstantHolder";
+import {exportSleepsUrl} from "./UrlConstantHolder";
 
 function sendExportSleepsRequest (dateFrom, dateTo, reseaorchNumbers) {
     let researchNumbersParam = ""

@@ -1,6 +1,6 @@
 import './App.css';
-import HeaderAndMain from "./components/HeaderAndMain";
-import Footer from "./components/Footer";
+import HeaderAndMain from "./components/HeaderMainFooter/HeaderAndMain";
+import Footer from "./components/HeaderMainFooter/Footer";
 import React from "react";
 import {checkAuthorized} from "./AxiosAuthenticatorChecker";
 

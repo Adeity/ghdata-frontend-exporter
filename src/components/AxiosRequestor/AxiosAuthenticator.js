@@ -1,5 +1,5 @@
 import axios from "axios";
-import {loginUrl} from "../UrlConstantHolder";
+import {loginUrl} from "./UrlConstantHolder";
 
 function sendAuthenticateRequest (username, password) {
     let bodyFormData = new FormData()

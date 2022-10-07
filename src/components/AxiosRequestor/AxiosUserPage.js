@@ -1,5 +1,5 @@
 import axios from "axios";
-import {logoutUrl, changePasswordUrl} from "../UrlConstantHolder";
+import {logoutUrl, changePasswordUrl} from "./UrlConstantHolder";
 
 function sendLogoutRequest () {
     return axios(

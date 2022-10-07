@@ -2,8 +2,8 @@ import React from "react";
 import ChangePasswordCard from "./ChangePasswordCard";
 import './UserPage.css'
 import Button from "react-bootstrap/Button";
-import {CloseButton, Col, Row} from "react-bootstrap";
-import {sendChangePasswordRequest, sendLogoutRequest} from "../AxiosRequestor/AxiosRequestor";
+import {Col, Row} from "react-bootstrap";
+import {sendLogoutRequest} from "../AxiosRequestor/AxiosRequestor";
 
 class UserPage extends React.Component {
     constructor(props) {
@@ -25,7 +25,6 @@ class UserPage extends React.Component {
 
 
     render () {
-        const currentCard = <ChangePasswordCard />;
         return (
             <div className="UserPage">
                 <Row>
@@ -36,7 +35,7 @@ class UserPage extends React.Component {
                 </Row>
                 <Row>
                     <Col>
-                        {currentCard}
+                        <ChangePasswordCard />
                     </Col>
                 </Row>
                 <Row>

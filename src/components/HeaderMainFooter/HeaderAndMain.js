@@ -2,12 +2,11 @@ import {BrowserRouter as Router, Link, Route, Routes} from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import SleepExportPage from "./SleepExportPage";
-import UserPage from "./UserPage/UserPage";
+import SleepExportPage from "../SleepExportPage/SleepExportPage";
+import UserPage from "../UserPage/UserPage";
 import React from "react";
-import LoginPage from "./LoginPage/LoginPage";
-import RestrictedRoute from "./RestrictedRootComponent/RestrictedRoute";
-import "./Link.css"
+import LoginPage from "../LoginPage/LoginPage";
+import RestrictedRoute from "../RestrictedRootComponent/RestrictedRoute";
 
 class HeaderAndMain extends React.Component{
     constructor(props) {

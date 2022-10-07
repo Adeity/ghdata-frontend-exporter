@@ -1,6 +1,6 @@
 import {Alert, Col, Row} from "react-bootstrap";
 import React from "react";
-import {sendExportSleepsRequest, sendGetActiveResearchNumbersRequest} from "./AxiosRequestor/AxiosRequestor";
+import {sendExportSleepsRequest, sendGetActiveResearchNumbersRequest} from "../AxiosRequestor/AxiosRequestor";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
