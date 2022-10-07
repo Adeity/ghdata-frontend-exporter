@@ -2,8 +2,9 @@ import {Alert, Col, Row} from "react-bootstrap";
 import React from "react";
 import {sendExportSleepsRequest, sendGetActiveResearchNumbersRequest} from "./AxiosRequestor/AxiosRequestor";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
-class Home extends React.Component{
+class SleepExportPage extends React.Component{
     constructor(props) {
         super(props);
         this.state={
@@ -118,16 +119,25 @@ class Home extends React.Component{
         const researchNumbers = []
         researchNumbers.push(
             <div key={"all"}>
-                <input type={"checkbox"} id={"allResearchNumbers"} value={this.state.allResearchersChecked} onChange={(e) => this.handleToggleAllResearchersChecbox(e)}/>
-                <label htmlFor={"allResearchNumbers"} style={{"user-select": "none"}}>Vsichni ucastnici</label>
+                <Form.Check
+                    type={"checkbox"}
+                    id={"allResearchNumbers"}
+                    value={this.state.allResearchersChecked}
+                    onChange={(e) => this.handleToggleAllResearchersChecbox(e)}
+                    label={"Vsichni ucastnici"}/>
             </div>
         )
         this.state.researchNumbers.forEach((e, i) => {
             const isChecked = this.state.allResearchersChecked ? true : e.checked
             researchNumbers.push(
                 <div key={i}>
-                    <input type={"checkbox"} id={i} disabled={!!this.state.allResearchersChecked} checked={isChecked} onChange={(event) => this.setResearchNumberChecked(e.id, event.target.checked)}/>
-                    <label htmlFor={i} style={{"user-select": "none"}}>{e.value}</label>
+                    <Form.Check
+                        type={"checkbox"}
+                        id={i}
+                        disabled={this.state.allResearchersChecked}
+                        checked={isChecked}
+                        onChange={(event) => this.setResearchNumberChecked(e.id, event.target.checked)}
+                        label={e.value}/>
                 </div>
             )
         })
@@ -137,21 +147,25 @@ class Home extends React.Component{
             <div>
                 <h3>Export spanku</h3>
                 <Row>
-                    <Col>
-                        Datum:
-                    </Col>
-                    <Col className={"d-flex justify-content-center"}>
-                        <label className={"pe-2"}>Od</label>
-                        <input type={"date"} id={"dateFrom"} onChange={(e) => this.handleDateFromChange(e)} value={this.state.dateFrom}/>
-                    </Col>
-                    <Col className={"d-flex justify-content-center"}>
-                        <label className={"pe-2"}>Do</label>
-                        <input type={"date"} id={"dateTo"} onChange={(e) => this.handleDateToChange(e)} value={this.state.dateTo}/>
-                    </Col>
+                    <Row>
+                        <Col>
+                            <b>Datum</b>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={"d-flex justify-content-center"}>
+                            <label className={"pe-2"}>Od</label>
+                            <input type={"date"} id={"dateFrom"} onChange={(e) => this.handleDateFromChange(e)} value={this.state.dateFrom}/>
+                        </Col>
+                        <Col className={"d-flex justify-content-center"}>
+                            <label className={"pe-2"}>Do</label>
+                            <input type={"date"} id={"dateTo"} onChange={(e) => this.handleDateToChange(e)} value={this.state.dateTo}/>
+                        </Col>
+                    </Row>
                 </Row>
                 <Row>
                     <Col>
-                        Ucastnici
+                        <b>Ucastnici</b>
                         {researchNumbers}
                     </Col>
                 </Row>
@@ -168,4 +182,4 @@ class Home extends React.Component{
 
 }
 
-export default Home
+export default SleepExportPage

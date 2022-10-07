@@ -2,7 +2,7 @@ import {BrowserRouter as Router, Link, Route, Routes} from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import Home from "../components/Home";
+import SleepExportPage from "./SleepExportPage";
 import UserPage from "./UserPage/UserPage";
 import React from "react";
 import LoginPage from "./LoginPage/LoginPage";
@@ -26,7 +26,7 @@ class HeaderAndMain extends React.Component{
                             VyzkumOdolnosti exporter
                         </Navbar.Brand>
                         <Nav className="me-auto">
-                            <Link className="nav-link" to="/">Spanek</Link>
+                            <Link className="nav-link" to="/">Export z Wearables</Link>
                         </Nav>
                         <Navbar.Toggle />
                         <Navbar.Collapse className="justify-content-end">
@@ -43,7 +43,7 @@ class HeaderAndMain extends React.Component{
                                 <RestrictedRoute
                                     authorizationConstants={this.props.authorizationConstants}
                                 >
-                                    <Home/>
+                                    <SleepExportPage/>
                                 </RestrictedRoute>
                             } />
                             <Route path="/user-page" element={
