@@ -70,18 +70,18 @@ class LoginPage extends React.Component {
                         <input value={this.state.username}
                                onChange={(e) => this.handleUsernameChange(e)}
                                className="form-control"
-                               id="floatingInput"
+                               id="loginUsername"
                                placeholder="name@example.com"/>
-                            <label htmlFor="floatingInput">Uživatelské jméno</label>
+                            <label htmlFor="loginUsername">Uživatelské jméno</label>
                     </div>
                     <div className="form-floating">
                         <input type="password"
                                className="form-control"
-                               id="floatingPassword"
+                               id="loginPassword"
                                 onChange={(e) => this.handlePasswordChange(e)}
                                 value={this.state.password}
                                placeholder="Heslo"/>
-                            <label htmlFor="floatingPassword">Heslo</label>
+                            <label htmlFor="loginPassword">Heslo</label>
                     </div>
 
                 <div className={"ErrorMessage"}>

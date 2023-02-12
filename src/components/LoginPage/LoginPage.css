@@ -9,13 +9,13 @@
     z-index: 2;
 }
 
-.form-signin input[type="email"] {
+.form-signin input#loginUsername{
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-.form-signin input[type="password"] {
+.form-signin input#loginPassword{
     margin-bottom: 0.625rem;
     border-top-left-radius: 0;
     border-top-right-radius: 0;

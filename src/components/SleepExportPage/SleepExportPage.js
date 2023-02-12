@@ -4,7 +4,7 @@ import {sendExportSleepsRequest, sendGetActiveResearchNumbersRequest} from "../A
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-class SleepExportPage extends React.Component {
+class SleepExportPage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -16,15 +16,12 @@ class SleepExportPage extends React.Component {
             loading: false
         }
     }
-
     setDateFrom(dateFrom) {
         this.setState({dateFrom: dateFrom})
     }
-
     setDateTo(dateTo) {
         this.setState({dateTo: dateTo})
     }
-
     setResearchNumbersFromResponse(researchNumberFromResponse) {
         const researchNumbers = []
         researchNumberFromResponse.forEach((e, index) => {
@@ -36,17 +33,13 @@ class SleepExportPage extends React.Component {
         })
         this.setState({researchNumbers: researchNumbers})
     }
-
     setResearchNumberChecked(id, newChecked) {
         const newResearchNumbers = [...this.state.researchNumbers]
         newResearchNumbers.forEach((e) => {
-            if (e.id === id) {
-                e.checked = newChecked
-            }
+            if (e.id === id) {e.checked = newChecked}
         })
         this.setState({researchNumbers: newResearchNumbers})
     }
-
     getResearchNumberCheckedValues() {
         return this.state.researchNumbers.filter(e => {
             if (this.state.allResearchersChecked) {
@@ -55,19 +48,15 @@ class SleepExportPage extends React.Component {
             return e.checked;
         }).map(e => e.value)
     }
-
     handleDateFromChange(e) {
         this.setDateFrom(e.target.value)
     }
-
     handleDateToChange(e) {
         this.setDateTo(e.target.value)
     }
-
     handleToggleAllResearchersChecbox(e) {
         this.setState({allResearchersChecked: e.target.checked})
     }
-
     getResearchNumbers() {
         sendGetActiveResearchNumbersRequest()
             .then((res) => {
@@ -150,7 +139,8 @@ class SleepExportPage extends React.Component {
                     className={"form-check-input"}
                     type={"checkbox"}
                     value={this.state.allResearchersChecked}
-                />
+                    onChange={(e) => this.handleToggleAllResearchersChecbox(e)}
+                    label={"Vsichni ucastnici"}/>
             </div>
         )
         this.state.researchNumbers.forEach((e, i) => {
@@ -179,36 +169,9 @@ class SleepExportPage extends React.Component {
                         />
 
                 </div>
-                // <div key={i} className={"form-check"}>
-                //     <label
-                //         className={"form-check-label"}
-                //         htmlFor={e.value + "checkbox"}
-                //     >
-                //         {e.value}
-                //     </label>
-                //     <input
-                //         id={e.value + "checkbox"}
-                //         onChange={(event) => this.setResearchNumberChecked(e.id, event.target.checked)}
-                //         className={"form-check-input"}
-                //         type={"checkbox"}
-                //         checked={isChecked}
-                //         disabled={this.state.allResearchersChecked}
-                //         value={e.value}
-                //     />
-                // </div>
-                // <div key={i}>
-                //     <Form.Check
-                //         type={"checkbox"}
-                //         id={i}
-                //         disabled={this.state.allResearchersChecked}
-                //         checked={isChecked}
-                //         onChange={(event) => this.setResearchNumberChecked(e.id, event.target.checked)}
-                //         label={e.value}/>
-                // </div>
             )
         })
-        const errorAlert = this.state.errorMessage !== null ?
-            <Alert variant={"danger"}>{this.state.errorMessage}</Alert> : null;
+        const errorAlert = this.state.errorMessage !== null ? <Alert variant={"danger"}>{this.state.errorMessage}</Alert> : null;
         const loadingAlert = this.state.loading === true ? <Alert variant={"info"}>Probiha export</Alert> : null;
         return (
             <div className={"m-auto w-md-75 form-signin"}>
@@ -236,8 +199,6 @@ class SleepExportPage extends React.Component {
                     {errorAlert}
                     {loadingAlert}
                 </form>
-                <Row>
-                </Row>
             </div>
         )
     }
