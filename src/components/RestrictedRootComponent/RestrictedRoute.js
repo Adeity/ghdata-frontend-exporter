@@ -14,6 +14,7 @@ const RestrictedRoute = (props) => {
     }, [props.authorizationConstants.isLoggedIn, props.authorizationConstants.authorizationChecked, navigate])
 
     const isAuthorized = props.authorizationConstants.isLoggedIn && props.authorizationConstants.authorizationChecked;
+    // const isAuthorized = true
     const page = isAuthorized ? props.children : null
     const classname = isAuthorized ? "RestrictedRouteAllowed" : "RestrictedRouteLocked"
     return (

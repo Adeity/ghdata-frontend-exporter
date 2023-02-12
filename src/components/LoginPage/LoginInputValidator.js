@@ -4,7 +4,7 @@ function validateInput(username, password) {
 }
 
 function validateUsername(username) {
-   validateLength(username, "Uzivatelske jmeno")
+   validateLength(username, "Uživatelské jméno")
 }
 
 
@@ -14,7 +14,7 @@ function validatePassword(password) {
 
 function validateLength(input, inputName) {
     if (input.length < 1) {
-        throw new Error(inputName + " je prilis kratke!")
+        throw new Error(inputName + " je příliš krátké!")
     }
     return input.length >= 1;
 

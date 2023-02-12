@@ -1,7 +1,5 @@
 import {BrowserRouter as Router, Link, Route, Routes} from "react-router-dom";
-import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
 import SleepExportPage from "../SleepExportPage/SleepExportPage";
 import UserPage from "../UserPage/UserPage";
 import React from "react";
@@ -15,26 +13,23 @@ class HeaderAndMain extends React.Component{
 
     render () {
         const loginOrUserLink = this.props.authorizationConstants.isLoggedIn ?
-            (<Link className="nav-link" to="/user-page">Prihlasen jako: {this.props.authorizationConstants.username}</Link>) :
-            (<Link className="nav-link" to="/login">Prihlasit se</Link>)
+            (<Link className="nav-link" to="/user-page">Příhlášen jako: {this.props.authorizationConstants.username}</Link>) :
+            (<Link className="nav-link" to="/login">Přihlásit se</Link>)
         return (
             <Router>
-                <Navbar bg="light" className={"mb-3"}>
-                    <Container>
-                        <Navbar.Brand>
-                            VyzkumOdolnosti exporter
-                        </Navbar.Brand>
-                        <Nav className="me-auto">
-                            <Link className="nav-link" to="/">Export z Wearables</Link>
-                        </Nav>
-                        <Navbar.Toggle />
-                        <Navbar.Collapse className="justify-content-end">
-                            <Navbar.Text>
-                                {loginOrUserLink}
-                            </Navbar.Text>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
+                <header className=" container d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                    <span className={"d-flex align-items-center me-md-auto fs-4"}>
+                        Výzkum Odolnosti Admin
+                    </span>
+
+                    <ul className="nav nav-pills">
+                        <li className={"nav-item"}><Link to="/" className={"nav-link"}>Export z wearables</Link></li>
+                    </ul>
+                    <ul className="nav nav-pills">
+                        <li className={"nav-item"}>{loginOrUserLink}</li>
+                    </ul>
+                </header>
+
                 <main>
                     <Container className={"h-100"}>
                         <Routes>

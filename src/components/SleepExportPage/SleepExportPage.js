@@ -4,10 +4,10 @@ import {sendExportSleepsRequest, sendGetActiveResearchNumbersRequest} from "../A
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-class SleepExportPage extends React.Component{
+class SleepExportPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             dateFrom: "",
             dateTo: "",
             researchNumbers: [],
@@ -16,12 +16,15 @@ class SleepExportPage extends React.Component{
             loading: false
         }
     }
+
     setDateFrom(dateFrom) {
         this.setState({dateFrom: dateFrom})
     }
+
     setDateTo(dateTo) {
         this.setState({dateTo: dateTo})
     }
+
     setResearchNumbersFromResponse(researchNumberFromResponse) {
         const researchNumbers = []
         researchNumberFromResponse.forEach((e, index) => {
@@ -33,13 +36,17 @@ class SleepExportPage extends React.Component{
         })
         this.setState({researchNumbers: researchNumbers})
     }
+
     setResearchNumberChecked(id, newChecked) {
         const newResearchNumbers = [...this.state.researchNumbers]
         newResearchNumbers.forEach((e) => {
-            if (e.id === id) {e.checked = newChecked}
+            if (e.id === id) {
+                e.checked = newChecked
+            }
         })
         this.setState({researchNumbers: newResearchNumbers})
     }
+
     getResearchNumberCheckedValues() {
         return this.state.researchNumbers.filter(e => {
             if (this.state.allResearchersChecked) {
@@ -48,15 +55,19 @@ class SleepExportPage extends React.Component{
             return e.checked;
         }).map(e => e.value)
     }
+
     handleDateFromChange(e) {
         this.setDateFrom(e.target.value)
     }
+
     handleDateToChange(e) {
         this.setDateTo(e.target.value)
     }
+
     handleToggleAllResearchersChecbox(e) {
         this.setState({allResearchersChecked: e.target.checked})
     }
+
     getResearchNumbers() {
         sendGetActiveResearchNumbersRequest()
             .then((res) => {
@@ -75,15 +86,16 @@ class SleepExportPage extends React.Component{
         this.setDateFrom(dateFrom.toISOString().slice(0, 10))
     }
 
-    handleExportButtonClick() {
+    handleExportButtonClick(e) {
+        e.preventDefault()
         this.setState({loading: false})
         const checkedResearchNumbers = this.getResearchNumberCheckedValues()
         if (checkedResearchNumbers.length < 1) {
-            this.setState({errorMessage: "Musi byt vybran alespon jeden ucastnik."})
+            this.setState({errorMessage: "Musí být vybrán alespoň jeden účastník."})
             return;
         }
         if (this.state.dateTo === "" || this.state.dateFrom === "") {
-            this.setState({errorMessage: "Musi byt zadan datum od i do"})
+            this.setState({errorMessage: "Musí být vybrán datum od i do."})
             return;
         }
 
@@ -104,77 +116,127 @@ class SleepExportPage extends React.Component{
                 a.click();
                 this.setState({loading: false})
             }).catch(async (err) => {
-                const message = JSON.parse(await err.response.data.text())
-                if (message !== null) {
-                    this.setState({errorMessage: message.message})
-                } else {
-                    this.setState({errorMessage: "Export skoncil chybou"})
-                }
-                this.setState({loading: false})
-            })
+            const message = JSON.parse(await err.response.data.text())
+            if (message !== null) {
+                this.setState({errorMessage: message.message})
+            } else {
+                this.setState({errorMessage: "Export skoncil chybou"})
+            }
+            this.setState({loading: false})
+        })
 
     }
 
     render() {
         const researchNumbers = []
         researchNumbers.push(
-            <div key={"all"}>
-                <Form.Check
-                    type={"checkbox"}
+            // <div key={"all"}>
+            //     <Form.Check
+            //         type={"checkbox"}
+            //         id={"allResearchNumbers"}
+            //         value={this.state.allResearchersChecked}
+            //         onChange={(e) => this.handleToggleAllResearchersChecbox(e)}
+            //         label={"Vsichni ucastnici"}/>
+            // </div>
+            <div key={"all"} className={"form-check"}>
+                <label
+                    className={"form-check-label"}
+                    htmlFor={"allResearchNumbers"}
+                >
+                    {"Všichni účastníci"}</label>
+                <input
                     id={"allResearchNumbers"}
-                    value={this.state.allResearchersChecked}
                     onChange={(e) => this.handleToggleAllResearchersChecbox(e)}
-                    label={"Vsichni ucastnici"}/>
+                    className={"form-check-input"}
+                    type={"checkbox"}
+                    value={this.state.allResearchersChecked}
+                />
             </div>
         )
         this.state.researchNumbers.forEach((e, i) => {
             const isChecked = this.state.allResearchersChecked ? true : e.checked
             researchNumbers.push(
-                <div key={i}>
-                    <Form.Check
-                        type={"checkbox"}
-                        id={i}
-                        disabled={this.state.allResearchersChecked}
-                        checked={isChecked}
-                        onChange={(event) => this.setResearchNumberChecked(e.id, event.target.checked)}
-                        label={e.value}/>
+                // <div key={i}>
+                //     <label className={"form-label"}>{e.value}</label>
+                //     <input className={"form-control"} type={"checkbox"} value={e.value}/>
+                // </div>
+
+                <div key={i} className={"form-check"}>
+                        <label
+                            className={"form-check-label"}
+                            htmlFor={e.value + "checkbox"}
+                        >
+                            {e.value}
+                        </label>
+                        <input
+                            id={e.value + "checkbox"}
+                            onChange={(event) => this.setResearchNumberChecked(e.id, event.target.checked)}
+                            className={"form-check-input"}
+                            type={"checkbox"}
+                            checked={isChecked}
+                            disabled={this.state.allResearchersChecked}
+                            value={e.value}
+                        />
+
                 </div>
+                // <div key={i} className={"form-check"}>
+                //     <label
+                //         className={"form-check-label"}
+                //         htmlFor={e.value + "checkbox"}
+                //     >
+                //         {e.value}
+                //     </label>
+                //     <input
+                //         id={e.value + "checkbox"}
+                //         onChange={(event) => this.setResearchNumberChecked(e.id, event.target.checked)}
+                //         className={"form-check-input"}
+                //         type={"checkbox"}
+                //         checked={isChecked}
+                //         disabled={this.state.allResearchersChecked}
+                //         value={e.value}
+                //     />
+                // </div>
+                // <div key={i}>
+                //     <Form.Check
+                //         type={"checkbox"}
+                //         id={i}
+                //         disabled={this.state.allResearchersChecked}
+                //         checked={isChecked}
+                //         onChange={(event) => this.setResearchNumberChecked(e.id, event.target.checked)}
+                //         label={e.value}/>
+                // </div>
             )
         })
-        const errorAlert = this.state.errorMessage !== null ? <Alert variant={"danger"}>{this.state.errorMessage}</Alert> : null;
+        const errorAlert = this.state.errorMessage !== null ?
+            <Alert variant={"danger"}>{this.state.errorMessage}</Alert> : null;
         const loadingAlert = this.state.loading === true ? <Alert variant={"info"}>Probiha export</Alert> : null;
         return (
-            <div>
-                <h3>Export spanku</h3>
-                <Row>
-                    <Row>
-                        <Col>
-                            <b>Datum</b>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className={"d-flex justify-content-center"}>
-                            <label className={"pe-2"}>Od</label>
-                            <input type={"date"} id={"dateFrom"} onChange={(e) => this.handleDateFromChange(e)} value={this.state.dateFrom}/>
-                        </Col>
-                        <Col className={"d-flex justify-content-center"}>
-                            <label className={"pe-2"}>Do</label>
-                            <input type={"date"} id={"dateTo"} onChange={(e) => this.handleDateToChange(e)} value={this.state.dateTo}/>
-                        </Col>
-                    </Row>
-                </Row>
-                <Row>
-                    <Col>
-                        <b>Ucastnici</b>
+            <div className={"m-auto w-md-75 form-signin"}>
+                <h6>Export spánku</h6>
+                <form>
+                    <div className={"mb-3 form-floating"}>
+                        <input className={"form-control"} type={"date"} id={"dateFrom"}
+                               onChange={(e) => this.handleDateFromChange(e)} value={this.state.dateFrom}/>
+                        <label className={"form-label"}>Datum od</label>
+                    </div>
+                    <div className={"mb-3 form-floating"}>
+                        <input className={"form-control"} type={"date"} id={"dateFrom"}
+                               onChange={(e) => this.handleDateToChange(e)} value={this.state.dateTo}/>
+                        <label className={"form-label"}>Datum do</label>
+                    </div>
+                    <div className={"d-flex flex-column"}>
+                        <label className={"form-label"}>Učastníci</label>
                         {researchNumbers}
-                    </Col>
-                </Row>
-                <Row>
-                    <Button onClick={() => this.handleExportButtonClick()}>Export do XLS</Button>
-                </Row>
-                <Row>
+                    </div>
+                    <button
+                        onClick={(e) => this.handleExportButtonClick(e)}
+                        className="w-100 btn btn-lg btn-primary mt-3 mb-2"
+                        type="submit">Export do XLS
+                    </button>
                     {errorAlert}
                     {loadingAlert}
+                </form>
+                <Row>
                 </Row>
             </div>
         )

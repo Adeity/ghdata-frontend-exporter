@@ -1,18 +1,16 @@
-import Container from "react-bootstrap/Container";
-import {Row} from "react-bootstrap";
-import {Col} from "react-bootstrap";
-
 function Footer() {
     return (
-        <footer>
-            <Container>
-                <Row>
-                    <Col>
-                        <a className={""} href="src/components/HeaderMainFooter/Footer" >VyzkumOdolnosti</a>
-                    </Col>
-                </Row>
-            </Container>
-        </footer>
+        <div className="container">
+            <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <a href="//fvz.unob.cz/" className="">
+                    <img src="images/fvz.png" className="cvut-logo" alt="Logo FVZ"/>
+                </a>
+
+                <a href="//cvut.cz" className="">
+                    <img src="images/logo_cvut_en.svg" className="cvut-logo" alt="Logo ČVUT"/>
+                </a>
+            </footer>
+        </div>
     )
 }
 

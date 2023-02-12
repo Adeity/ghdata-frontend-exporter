@@ -26,26 +26,14 @@ class UserPage extends React.Component {
 
     render () {
         return (
-            <div className="UserPage">
-                <Row>
-                    <Col>
-                        <h3>Uzivatelska stranka</h3>
-                        <p>Prihlasen jako: {this.props.username}</p>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
+            <div className="UserPage form-signin">
+                        <h4>Uživatelská stránka</h4>
+                        <p>Přihlášen jako: {this.props.username}</p>
                         <ChangePasswordCard />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <h4>Odhlaseni</h4>
+                        <h6 className={"pt-3"}>Odhlášení</h6>
                         <div className={"d-flex justify-content-center"}>
-                            <Button onClick={() => this.handleLogoutButtonClick()}>Odhlasit se</Button>
+                            <Button onClick={() => this.handleLogoutButtonClick()}>Odhlásit se</Button>
                         </div>
-                    </Col>
-                </Row>
             </div>
         )
     }

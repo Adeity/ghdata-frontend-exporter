@@ -7,7 +7,7 @@ import {sendAuthenticateRequest} from "../AxiosRequestor/AxiosRequestor";
 import {validateInput} from "./LoginInputValidator";
 import "../Errors/ErrorMessage.css"
 import {Navigate} from "react-router-dom"
-import "../FormPage.css"
+// import "../FormPage.css"
 import {Alert} from "react-bootstrap";
 
 class LoginPage extends React.Component {
@@ -29,7 +29,8 @@ class LoginPage extends React.Component {
         this.setState({redirect: redirect})
     }
 
-    async handleSubmitClick() {
+    async handleSubmitClick(event) {
+        event.preventDefault()
         this.setState({err: null})
         try {
             validateInput(this.state.username, this.state.password)
@@ -39,7 +40,7 @@ class LoginPage extends React.Component {
                         this.props.setLoggedUser(res.data.username)
                         this.setRedirect(true)
                     } else {
-                        this.setErrorState("Kombinace uzivatelskeho jmena a hesla neexistuje")
+                        this.setErrorState("Kombinace uživatelského jména a hesla neexistuje.")
                     }
                 })
         } catch (e) {
@@ -62,41 +63,38 @@ class LoginPage extends React.Component {
             return <Navigate to='/'/>
         }
         return (
-            <div className="FormPage">
-                <h3>Prihlasit se</h3>
-                <Card>
-                    <Card.Body>
-                        <Form>
-                            <Form.Group className="mb-3" controlId="oldPassword">
-                                <Form.Label>Uzivatelske jmeno</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Zadejte uzivatelse jmeno"
-                                    onChange={(e) => this.handleUsernameChange(e)}
-                                    value={this.state.username}/>
-                            </Form.Group>
+            <form className={"form-signin h-100 m-auto"}>
+                    <h1 className="h3 mb-3 fw-normal">Prosím, přihlašte se</h1>
 
-                            <Form.Group className="mb-3" controlId="formPasswordNew">
-                                <Form.Label>Heslo</Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    placeholder="Zadejte heslo"
-                                    onChange={(e) => this.handlePasswordChange(e)}
-                                    value={this.state.password}/>
-                            </Form.Group>
+                    <div className="form-floating">
+                        <input value={this.state.username}
+                               onChange={(e) => this.handleUsernameChange(e)}
+                               className="form-control"
+                               id="floatingInput"
+                               placeholder="name@example.com"/>
+                            <label htmlFor="floatingInput">Uživatelské jméno</label>
+                    </div>
+                    <div className="form-floating">
+                        <input type="password"
+                               className="form-control"
+                               id="floatingPassword"
+                                onChange={(e) => this.handlePasswordChange(e)}
+                                value={this.state.password}
+                               placeholder="Heslo"/>
+                            <label htmlFor="floatingPassword">Heslo</label>
+                    </div>
 
-                            <div className={"ErrorMessage"}>
-                                {
-                                    this.state.err != null && <Alert variant={"danger"}>{this.state.err}</Alert>
-                                }
-                            </div>
-                            <Button variant="primary" onClick={() => this.handleSubmitClick()}>
-                                Prihlasit se
-                            </Button>
-                        </Form>
-                    </Card.Body>
-                </Card>
-            </div>
+                <div className={"ErrorMessage"}>
+                    {
+                        this.state.err != null && <Alert variant={"danger"}>{this.state.err}</Alert>
+                    }
+                </div>
+                <button
+                    onClick={(event) => this.handleSubmitClick(event)}
+                    className="w-100 btn btn-lg btn-primary mt-3"
+                        type="submit">Příhlásit se
+                </button>
+            </form>
         )
     }
 }
