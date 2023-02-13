@@ -6,8 +6,11 @@ const changePasswordUrl = baseUrl + "/api/security/change-password"
 const filterSleepsUrl = baseUrl + "/garmin/sleeps/filter"
 const checkAuthorizedUrl = baseUrl + "/api/security/check-authorized"
 const dummyUrl = baseUrl + "/api/security/dummy"
-const getActiveResearchNumbersUrl = baseUrl + "/device/active-research-numbers"
+const allResearchNumbersUrl = baseUrl + "/device/all"
 const exportSleepsUrl = baseUrl + "/garmin/sleeps/export"
+const participantsInformation = baseUrl + "/device/info"
+const invalidParticipants = baseUrl + "/device/invalid-number-candidates"
+const updateResearchNumber = baseUrl + "/device/update-research-number"
 
 export {
     loginUrl,
@@ -16,6 +19,9 @@ export {
     checkAuthorizedUrl,
     dummyUrl,
     logoutUrl,
-    getActiveResearchNumbersUrl,
-    exportSleepsUrl
+    allResearchNumbersUrl,
+    exportSleepsUrl,
+    participantsInformation,
+    invalidParticipants,
+    updateResearchNumber
 }

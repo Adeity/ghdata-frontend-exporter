@@ -26,8 +26,10 @@ class SleepExportPage extends React.Component{
         const researchNumbers = []
         researchNumberFromResponse.forEach((e, index) => {
             researchNumbers.push({
-                id: index,
-                value: e,
+                id: e.id,
+                value: e.researchNumber,
+                allowed: e.allowed,
+                deregistrationTime: e.deregistrationTime,
                 checked: false
             })
         })
@@ -60,6 +62,7 @@ class SleepExportPage extends React.Component{
     getResearchNumbers() {
         sendGetActiveResearchNumbersRequest()
             .then((res) => {
+                console.log(res)
                 this.setResearchNumbersFromResponse(res.data)
             })
             .catch((e) => {
@@ -145,6 +148,11 @@ class SleepExportPage extends React.Component{
         )
         this.state.researchNumbers.forEach((e, i) => {
             const isChecked = this.state.allResearchersChecked ? true : e.checked
+            // const isAllowed = e.allowed ? "" : "(odhlášen)"
+            if (e.allowed === false && e.deregistrationTime === undefined) {
+                return;
+            }
+            const loggedOff = e.allowed === false ? "(odhlášen)" : "";
             researchNumbers.push(
                 // <div key={i}>
                 //     <label className={"form-label"}>{e.value}</label>
@@ -156,7 +164,7 @@ class SleepExportPage extends React.Component{
                             className={"form-check-label"}
                             htmlFor={e.value + "checkbox"}
                         >
-                            {e.value}
+                            {e.value} <span className={"text-warning"}>{loggedOff}</span>
                         </label>
                         <input
                             id={e.value + "checkbox"}

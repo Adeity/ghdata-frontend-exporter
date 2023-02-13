@@ -81,19 +81,19 @@ class ChangePasswordCard extends React.Component {
             <div className="FormPage">
                 <h6>Změna hesla</h6>
                 <Form>
-                    <Form.Group className="mb-3 form-floating" controlId="oldPassword">
+                    <Form.Group className="mb-3 form-floating" >
                         <Form.Control id={"soucasnePassword"} onChange={(e) => this.handleCurrentPasswordChange(e)}
                                       type="password" placeholder="Zadejte současné heslo"/>
                         <Form.Label htmlFor={"soucasnePassword"}>Současné heslo</Form.Label>
                     </Form.Group>
 
-                    <Form.Group className="mb-3 form-floating" controlId="formPasswordNew">
+                    <Form.Group className="mb-3 form-floating" >
                         <Form.Control id={"newPassword"} onChange={(e) => this.handleNewPasswordChange(e)}
                                       type="password" placeholder="Zadejte nové heslo"/>
                         <Form.Label htmlFor={"newPassword"}>Nové heslo</Form.Label>
                     </Form.Group>
 
-                    <Form.Group className="mb-3 form-floating" controlId="formPasswordNewCheck">
+                    <Form.Group className="mb-3 form-floating" >
                         <Form.Control onChange={(e) => this.handleNewPasswordRepeatedChange(e)} type="password"
                                       placeholder="Zadejte nové heslo znovu"/>
                         <Form.Label>Nové heslo znovu</Form.Label>

@@ -1,11 +1,11 @@
 import axios from "axios";
-import {getActiveResearchNumbersUrl} from "./UrlConstantHolder";
+import {allResearchNumbersUrl} from "./UrlConstantHolder";
 
 function sendGetActiveResearchNumbersRequest() {
     return axios(
         {
             method: "get",
-            url: getActiveResearchNumbersUrl,
+            url: allResearchNumbersUrl,
             withCredentials: true
         }
     )

@@ -5,6 +5,8 @@ import UserPage from "../UserPage/UserPage";
 import React from "react";
 import LoginPage from "../LoginPage/LoginPage";
 import RestrictedRoute from "../RestrictedRootComponent/RestrictedRoute";
+import ParticipantsPage from "../ParticipantsPage/ParticipantsPage";
+import ResearchNumberCheckPage from "../ParticipantsPage/ResearchNumberCheckPage";
 
 class HeaderAndMain extends React.Component{
     constructor(props) {
@@ -24,8 +26,16 @@ class HeaderAndMain extends React.Component{
 
                     <ul className="nav nav-pills">
                         <li className={"nav-item"}><Link to="/" className={"nav-link"}>Export z wearables</Link></li>
-                    </ul>
-                    <ul className="nav nav-pills">
+                        <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Účastníci
+                            </a>
+                            <ul className="dropdown-menu">
+                                {/*<li><Link className="dropdown-item" to="/participants/all">Seznam</Link></li>*/}
+                                <li><Link className="dropdown-item" to="/participants/number-check">Kontrola výzkumných čisel</Link></li>
+                            </ul>
+                        </li>
                         <li className={"nav-item"}>{loginOrUserLink}</li>
                     </ul>
                 </header>
@@ -38,6 +48,20 @@ class HeaderAndMain extends React.Component{
                                     authorizationConstants={this.props.authorizationConstants}
                                 >
                                     <SleepExportPage/>
+                                </RestrictedRoute>
+                            } />
+                            <Route path="/participants/all" element={
+                                <RestrictedRoute
+                                    authorizationConstants={this.props.authorizationConstants}
+                                >
+                                    <ParticipantsPage />
+                                </RestrictedRoute>
+                            } />
+                            <Route path="/participants/number-check" element={
+                                <RestrictedRoute
+                                    authorizationConstants={this.props.authorizationConstants}
+                                >
+                                    <ResearchNumberCheckPage />
                                 </RestrictedRoute>
                             } />
                             <Route path="/user-page" element={
