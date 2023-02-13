@@ -32,7 +32,7 @@ class HeaderAndMain extends React.Component{
                                 Účastníci
                             </a>
                             <ul className="dropdown-menu">
-                                {/*<li><Link className="dropdown-item" to="/participants/all">Seznam</Link></li>*/}
+                                <li><Link className="dropdown-item" to="/participants/all">Seznam</Link></li>
                                 <li><Link className="dropdown-item" to="/participants/number-check">Kontrola výzkumných čisel</Link></li>
                             </ul>
                         </li>

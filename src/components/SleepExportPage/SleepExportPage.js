@@ -1,8 +1,8 @@
 import {Alert, Col, Row} from "react-bootstrap";
 import React from "react";
 import {sendExportSleepsRequest, sendGetActiveResearchNumbersRequest} from "../AxiosRequestor/AxiosRequestor";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import {getActiveDescription} from "../ParticipantsPage/ParticipantsUtils";
+import StatusInfoComponent from "../StatusInfoComponent";
 
 class SleepExportPage extends React.Component{
     constructor(props) {
@@ -152,7 +152,7 @@ class SleepExportPage extends React.Component{
             if (e.allowed === false && e.deregistrationTime === undefined) {
                 return;
             }
-            const loggedOff = e.allowed === false ? "(odhlášen)" : "";
+            const {name, description} = getActiveDescription(e.all, e.deregistrationTime)
             researchNumbers.push(
                 // <div key={i}>
                 //     <label className={"form-label"}>{e.value}</label>
@@ -164,7 +164,7 @@ class SleepExportPage extends React.Component{
                             className={"form-check-label"}
                             htmlFor={e.value + "checkbox"}
                         >
-                            {e.value} <span className={"text-warning"}>{loggedOff}</span>
+                            {e.value} <span className={"text-muted"}>(<StatusInfoComponent allowed={e.allowed} deregistrationTime={e.deregistrationTime}/>)</span>
                         </label>
                         <input
                             id={e.value + "checkbox"}
