@@ -152,7 +152,6 @@ class SleepExportPage extends React.Component{
             if (e.allowed === false && e.deregistrationTime === undefined) {
                 return;
             }
-            const {name, description} = getActiveDescription(e.all, e.deregistrationTime)
             researchNumbers.push(
                 // <div key={i}>
                 //     <label className={"form-label"}>{e.value}</label>

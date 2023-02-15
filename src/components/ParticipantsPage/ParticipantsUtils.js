@@ -1,4 +1,4 @@
-export function getActiveDescription(allowed, deregistrationTime) {
+function getActiveDescription(allowed, deregistrationTime) {
     if (allowed === false && deregistrationTime === undefined) {
         return {
             name: "Nedokončil registraci",
@@ -17,3 +17,5 @@ export function getActiveDescription(allowed, deregistrationTime) {
     }
     return "";
 }
+
+export {getActiveDescription}

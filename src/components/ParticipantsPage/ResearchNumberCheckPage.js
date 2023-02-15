@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {invalidParticipants, updateResearchNumber} from "../AxiosRequestor/UrlConstantHolder";
 import {getActiveDescription} from "./ParticipantsUtils";
+import StatusInfoComponent from "../StatusInfoComponent";
 
 function ResearchNumberCheckPage(props) {
     const [invalids, setInvalids] = useState([])
@@ -84,7 +85,7 @@ function ResearchNumberCheckPage(props) {
                     <span><b>Účastník #{index+1}:</b> {e.researchNumber}</span>
                 </div>
                 <div className={"col-sm-3 border-start"}>
-                    <div><b>Status:</b> {getActiveDescription(e.allowed, e.deregistrationTime)}</div>
+                    <div><b>Status:</b> <StatusInfoComponent deregistrationTime={e.deregistrationTime} allowed={e.allowed}/></div>
                 </div>
                 <div className={"col-sm-4 col-md-3 border-start"}>
                     <b>Nové výzkumné č. </b>
