@@ -50,8 +50,7 @@ function ResearchNumberCheckPage(props) {
     function handleSubmit(index) {
         const invalid = invalids[index]
         const regexp = /^[A-Z0-9]{3}_[A-Z0-9]{3}$/
-        // const valid = regexp.test(invalid.newResearchNumber)
-        const valid = true
+        const valid = regexp.test(invalid.newResearchNumber)
         if (!valid) {
             setValid(index, false, "Vstup není validní.")
             return
