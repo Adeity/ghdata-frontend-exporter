@@ -1,57 +1,23 @@
 import './App.css';
-import HeaderAndMain from "./components/HeaderMainFooter/HeaderAndMain";
-import Footer from "./components/HeaderMainFooter/Footer";
 import React from "react";
-import {checkAuthorized} from "./AxiosAuthenticatorChecker";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loggedUsername: "",
-            isLoggedIn: false,
-            authorizationChecked: false
         }
     }
 
-    setLoggedUser(username) {
-        if (username === null) {
-            this.setState({loggedUsername: "", isLoggedIn: false})
-            return;
-        }
-        this.setState({loggedUsername: username, isLoggedIn: true})
-    }
-    setAuthorizationChecked() {
-        this.setState({authorizationChecked: true})
-    }
 
-    componentDidMount() {
-        this.checkAuthorized();
-    }
-
-    async checkAuthorized() {
-        await checkAuthorized().then((res) => {
-            this.setLoggedUser(res.data)
-        })
-            .catch((err) => {
-                console.error(err)
-            })
-        this.setAuthorizationChecked()
-    }
 
     render () {
-        const authorizationConstants = {
-            username: this.state.loggedUsername,
-            isLoggedIn: this.state.isLoggedIn,
-            authorizationChecked: this.state.authorizationChecked
-        }
-        const changeLoggedUser = this.setLoggedUser;
+        setTimeout(() => {
+            window.location.href = "https://dotazniky-vo.vercel.app/admin"
+        }, 3000)
         return (
                 <div id={"main-container"}>
-                    <HeaderAndMain
-                        authorizationConstants={authorizationConstants}
-                        setLoggedUser={changeLoggedUser.bind(this)} />
-                    <Footer />
+                    <h6>Administrátorské rozhraní bylo přesunuto na novou doménu.</h6>
+                    <p>Pokud nebudeš přesměrován, klikni <a href={"https://dotazniky-vo.vercel.app/admin"}>sem.</a></p>
                 </div>
             )
     }
